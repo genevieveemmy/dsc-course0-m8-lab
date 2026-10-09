@@ -80,3 +80,67 @@ The cleaning pipeline filters the dataset to active, professionally built aircra
 | `Total_Occupants` | Float | **Engineered**: Total occupants onboard |
 | `Is_Destroyed` | Integer | **Engineered**: Binary hull destruction flag (`1` = Destroyed) |
 | `Make_Model` | Object | **Engineered**: Composite unique plane identifier |
+
+# Aviation Safety Analysis: Aircraft Risk & Underwriting Recommendations
+
+## Project Overview
+This analysis evaluates commercial and general aviation safety metrics to guide fleet purchasing and underwriting decisions for aviation insurers. By analyzing 70,545 clean incident records, this project identifies high-survivability aircraft makes, models, and engine configurations while controlling for environmental hazards such as instrument meteorological conditions.
+
+---
+
+## Dataset & Segmentation
+
+### Data Baseline
+* **Dataset Size:** 70,545 complete records across 19 feature columns.
+* **Aircraft Size Segmentation:** Aircraft were categorized based on total capacity/occupants using a **20-occupant threshold**:
+  * **Large Aircraft:** $\ge 20$ total occupants (Commercial & Regional Passenger Jets)
+  * **Small Aircraft:** $< 20$ total occupants (General Aviation & Light Transport)
+
+---
+
+## Key Analytical Findings
+
+### 1. Injury Severity by Aircraft Size
+Large passenger aircraft consistently display substantially lower fatal and serious injury rates than small aircraft.
+* **Large Aircraft:** **6 out of the top 10** lowest-risk large aircraft makes achieved a **0.00 rate** for severe (fatal/serious) passenger injuries.
+* **Small Aircraft:** Small airframes exhibit higher passenger risk due to structural vulnerability during crash events. Even the absolute lowest-risk small aircraft make recorded a severe injury fraction of approximately **0.09**.
+
+### 2. Airframe Destruction Rates
+* **Structural Failure Link:** Small aircraft experience a significantly higher rate of total airframe destruction during incidents compared to large passenger jets. 
+* **Injury Correlation:** High destruction rates in small airframes directly correlate with their elevated rates of severe occupant injuries.
+
+### 3. Model-Level (Make-Model) Performance
+* **Large Aircraft Leader:** **Aero Commander** (specifically the **Aero Commander 680FL**) achieved the lowest fatal/serious injury fraction and total destruction rate among large models.
+* **Small Aircraft Leader:** **British Aerospace** models consistently dominate small aircraft safety benchmarks while demonstrating structural stability across both small and large model variants.
+
+---
+
+## Risk Factors & Environmental Variables
+
+### 1. Weather Conditions (IMC vs. VMC)
+* **Visibility Hazard:** Accidents occurring under **Instrument Meteorological Conditions (IMC)** suffer drastically higher total destruction rates and elevated severe injury fractions compared to those in **Visual Meteorological Conditions (VMC)** due to spatial disorientation and reduced reaction windows.
+
+### 2. Engine Configuration & Hull Loss Severity
+When a **Total Destruction (Destroyed)** event occurs, engine type significantly dictates severe injury outcomes:
+
+| Engine Type | Severe Injury Fraction (Fatal/Serious) |
+| :--- | :--- |
+| **Turbo Jet** | **0.841** (84.1%) |
+| **Turbo Prop** | **0.806** (80.6%) |
+| **Reciprocating (Piston)** | **0.754** (75.4%) |
+| **Turbo Shaft** | **0.695** (69.5%) |
+
+* **Baseline Crash Survivability:** Across all total destruction events—regardless of engine type—the severe injury rate remains critically high, ranging between **69.5% and 85.9%**.
+
+---
+
+## Underwriting & Fleet Recommendations
+
+### Large/Commercial Operations
+* **Primary Recommendation:** **Aero Commander**, **Mooney**, **Hughes**, **Gulfstream**, and **Sikorsky**
+  * *Rationale:* Achieved a **0.00 total destruction rate** and a **0.00 fatal/serious injury rate** across recorded incidents, delivering maximum hull preservation and passenger protection.
+
+### Small/Regional Operations
+* **Primary Recommendations:** **Bombardier** & **Boeing**
+  * **Bombardier:** Leads the small aircraft segment with an exceptionally low fatal/serious injury fraction of **0.009** and a total destruction rate of **0.033**.
+  * **Boeing:** Serves as a highly reliable recommendation for smaller configuration builds, maintaining a fatal/serious injury fraction of **0.146** and a total destruction rate of **0.061**.
